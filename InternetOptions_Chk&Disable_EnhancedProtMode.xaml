@@ -1,14 +1,4 @@
-﻿<Activity mc:Ignorable="sap sap2010 sads" x:Class="InternetOptions_Chk_Disable_EnhancedProtMode" mva:VisualBasic.Settings="{x:Null}" sap2010:WorkflowViewState.IdRef="InternetOptions_Chk_Disable_EnhancedProtMode_1"
- xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities"
- xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
- xmlns:mva="clr-namespace:Microsoft.VisualBasic.Activities;assembly=System.Activities"
- xmlns:sads="http://schemas.microsoft.com/netfx/2010/xaml/activities/debugger"
- xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation"
- xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation"
- xmlns:scg="clr-namespace:System.Collections.Generic;assembly=mscorlib"
- xmlns:sco="clr-namespace:System.Collections.ObjectModel;assembly=mscorlib"
- xmlns:ui="http://schemas.uipath.com/workflow/activities"
- xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+<Activity mc:Ignorable="sap sap2010" x:Class="InternetOptions_Chk_Disable_EnhancedProtMode" mva:VisualBasic.Settings="{x:Null}" sap:VirtualizedContainerService.HintSize="546,2639" sap2010:WorkflowViewState.IdRef="InternetOptions_Chk_Disable_EnhancedProtMode_1" xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:mva="clr-namespace:Microsoft.VisualBasic.Activities;assembly=System.Activities" xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation" xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation" xmlns:scg="clr-namespace:System.Collections.Generic;assembly=mscorlib" xmlns:sco="clr-namespace:System.Collections.ObjectModel;assembly=mscorlib" xmlns:ui="http://schemas.uipath.com/workflow/activities" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
   <TextExpression.NamespacesForImplementation>
     <sco:Collection x:TypeArguments="x:String">
       <x:String>System.Activities</x:String>
@@ -61,43 +51,169 @@
       <AssemblyReference>UiPath.Cryptography</AssemblyReference>
       <AssemblyReference>System.ValueTuple</AssemblyReference>
       <AssemblyReference>System.ComponentModel.Composition</AssemblyReference>
+      <AssemblyReference>OfficeDevPnP.Core</AssemblyReference>
+      <AssemblyReference>UiPathTeam.SharePoint</AssemblyReference>
+      <AssemblyReference>UiPath.CV</AssemblyReference>
+      <AssemblyReference>System.Runtime.WindowsRuntime</AssemblyReference>
+      <AssemblyReference>UiPath.System.Activities.Design</AssemblyReference>
     </sco:Collection>
   </TextExpression.ReferencesForImplementation>
-  <Sequence DisplayName="InternetOptions_Chk&amp;Disable_EnhancedProtMode" sap2010:WorkflowViewState.IdRef="Sequence_2">
+  <Sequence DisplayName="InternetOptions_Chk&amp;Disable_EnhancedProtMode" sap:VirtualizedContainerService.HintSize="526,2579" sap2010:WorkflowViewState.IdRef="Sequence_2">
     <Sequence.Variables>
       <Variable x:TypeArguments="x:Boolean" Name="blnEEPOptionEnabled" />
+      <Variable x:TypeArguments="x:Boolean" Name="blnInternetPropertiesWindowExists" />
     </Sequence.Variables>
-    <ui:StartProcess Arguments="{x:Null}" WorkingDirectory="{x:Null}" DisplayName="Start Process" FileName="C:\Windows\System32\inetcpl.cpl" sap2010:WorkflowViewState.IdRef="StartProcess_1" />
-    <ui:Click DelayBefore="{x:Null}" DelayMS="{x:Null}" ClickType="CLICK_SINGLE" ContinueOnError="True" DisplayName="Click 'page tab  Advanced'" sap2010:WorkflowViewState.IdRef="Click_1" KeyModifiers="None" MouseButton="BTN_LEFT" SendWindowMessages="False" SimulateClick="False">
-      <ui:Click.CursorPosition>
-        <ui:CursorPosition Position="Center">
-          <ui:CursorPosition.OffsetX>
-            <InArgument x:TypeArguments="x:Int32" />
-          </ui:CursorPosition.OffsetX>
-          <ui:CursorPosition.OffsetY>
-            <InArgument x:TypeArguments="x:Int32" />
-          </ui:CursorPosition.OffsetY>
-        </ui:CursorPosition>
-      </ui:Click.CursorPosition>
-      <ui:Click.Target>
-        <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" TimeoutMS="{x:Null}" InformativeScreenshot="0ec08dda5ba1deb50c55bdd7d8c124b4" Selector="&lt;wnd app='rundll32.exe' cls='#32770' title='Internet Properties' /&gt;&lt;ctrl name='Advanced' role='page tab' /&gt;" WaitForReady="COMPLETE" />
-      </ui:Click.Target>
-    </ui:Click>
-    <ui:UiElementExists DisplayName="Element Exists 'check box'" Exists="[blnEEPOptionEnabled]" sap2010:WorkflowViewState.IdRef="UiElementExists_1">
+    <sap:WorkflowViewStateService.ViewState>
+      <scg:Dictionary x:TypeArguments="x:String, x:Object">
+        <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+      </scg:Dictionary>
+    </sap:WorkflowViewStateService.ViewState>
+    <ui:StartProcess Arguments="{x:Null}" WorkingDirectory="{x:Null}" DisplayName="Start Process" FileName="C:\Windows\System32\inetcpl.cpl" sap:VirtualizedContainerService.HintSize="484,87" sap2010:WorkflowViewState.IdRef="StartProcess_1" />
+    <ui:RetryScope DisplayName="Retry Scope - Open Advanced" sap:VirtualizedContainerService.HintSize="484,463" sap2010:WorkflowViewState.IdRef="RetryScope_1" NumberOfRetries="5" RetryInterval="00:00:03">
+      <ui:RetryScope.ActivityBody>
+        <ActivityAction>
+          <Sequence DisplayName="Action" sap:VirtualizedContainerService.HintSize="376,198" sap2010:WorkflowViewState.IdRef="Sequence_6">
+            <sap:WorkflowViewStateService.ViewState>
+              <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+              </scg:Dictionary>
+            </sap:WorkflowViewStateService.ViewState>
+            <ui:Click DelayBefore="{x:Null}" DelayMS="{x:Null}" AlterIfDisabled="True" ClickType="CLICK_SINGLE" ContinueOnError="True" DisplayName="Click 'page tab  Advanced'" sap:VirtualizedContainerService.HintSize="334,106" sap2010:WorkflowViewState.IdRef="Click_1" KeyModifiers="None" MouseButton="BTN_LEFT" SendWindowMessages="False" SimulateClick="False">
+              <ui:Click.CursorPosition>
+                <ui:CursorPosition Position="Center">
+                  <ui:CursorPosition.OffsetX>
+                    <InArgument x:TypeArguments="x:Int32" />
+                  </ui:CursorPosition.OffsetX>
+                  <ui:CursorPosition.OffsetY>
+                    <InArgument x:TypeArguments="x:Int32" />
+                  </ui:CursorPosition.OffsetY>
+                </ui:CursorPosition>
+              </ui:Click.CursorPosition>
+              <ui:Click.Target>
+                <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" Id="ea53ef57-dd69-4e7b-8ac8-48264d7e38ac" InformativeScreenshot="0ec08dda5ba1deb50c55bdd7d8c124b4" Selector="&lt;wnd app='rundll32.exe' cls='#32770' title='Internet Properties' /&gt;&lt;ctrl name='Advanced' role='page tab' /&gt;" WaitForReady="COMPLETE">
+                  <ui:Target.TimeoutMS>
+                    <InArgument x:TypeArguments="x:Int32" />
+                  </ui:Target.TimeoutMS>
+                </ui:Target>
+              </ui:Click.Target>
+            </ui:Click>
+          </Sequence>
+        </ActivityAction>
+      </ui:RetryScope.ActivityBody>
+      <ui:RetryScope.Condition>
+        <ActivityFunc x:TypeArguments="x:Boolean">
+          <ui:UiElementExists Exists="{x:Null}" DisplayName="Element Exists '#32770'" sap:VirtualizedContainerService.HintSize="334,106" sap2010:WorkflowViewState.IdRef="UiElementExists_5">
+            <ui:UiElementExists.Target>
+              <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" Id="08c40b53-183d-4d5d-9d3b-8a43ab37c3ab" InformativeScreenshot="fae7c1d76599701c01f837e5cd0fdb20" Selector="&lt;wnd app='rundll32.exe' cls='#32770' title='Internet Properties' /&gt;&lt;wnd cls='#32770' title='Advanced' /&gt;">
+                <ui:Target.TimeoutMS>
+                  <InArgument x:TypeArguments="x:Int32" />
+                </ui:Target.TimeoutMS>
+                <ui:Target.WaitForReady>
+                  <InArgument x:TypeArguments="ui:WaitForReady" />
+                </ui:Target.WaitForReady>
+              </ui:Target>
+            </ui:UiElementExists.Target>
+          </ui:UiElementExists>
+        </ActivityFunc>
+      </ui:RetryScope.Condition>
+      <sap:WorkflowViewStateService.ViewState>
+        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+          <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+          <x:Boolean x:Key="IsPinned">False</x:Boolean>
+        </scg:Dictionary>
+      </sap:WorkflowViewStateService.ViewState>
+    </ui:RetryScope>
+    <ui:UiElementExists DisplayName="Element Exists 'check box'" Exists="[blnEEPOptionEnabled]" sap:VirtualizedContainerService.HintSize="484,106" sap2010:WorkflowViewState.IdRef="UiElementExists_1">
       <ui:UiElementExists.Target>
-        <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" InformativeScreenshot="5da84735ea8a8707133b501348c25238" Selector="&lt;wnd app='rundll32.exe' cls='#32770' title='Internet Properties' /&gt;&lt;wnd cls='#32770' title='Advanced' /&gt;&lt;wnd ctrlid='1439' title='Settings' /&gt;&lt;ctrl name='Enable Enhanced Protected Mode*-ON' role='check box' /&gt;" TimeoutMS="3000" WaitForReady="COMPLETE" />
+        <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" Id="96cc7b3a-b2ca-4489-a0b6-71f61a0735d0" InformativeScreenshot="5da84735ea8a8707133b501348c25238" Selector="&lt;wnd app='rundll32.exe' cls='#32770' title='Internet Properties' /&gt;&lt;wnd cls='#32770' title='Advanced' /&gt;&lt;wnd ctrlid='1439' title='Settings' /&gt;&lt;ctrl name='Enable Enhanced Protected Mode*-ON' role='check box' /&gt;" TimeoutMS="3000" WaitForReady="COMPLETE" />
       </ui:UiElementExists.Target>
     </ui:UiElementExists>
-    <ui:LogMessage DisplayName="Log Message" sap2010:WorkflowViewState.IdRef="LogMessage_1" Level="Info" Message="[blnEEPOptionEnabled.ToString]" />
-    <If Condition="[blnEEPOptionEnabled = true]" sap2010:WorkflowViewState.IdRef="If_1">
-      <If.Then>
-        <Sequence sap2010:WorkflowViewState.IdRef="Sequence_1">
-          <ui:SetFocus DelayBefore="{x:Null}" DelayMS="{x:Null}" ContinueOnError="True" DisplayName="Set Focus 'check box'" sap2010:WorkflowViewState.IdRef="SetFocus_1">
+    <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="484,91" sap2010:WorkflowViewState.IdRef="LogMessage_1" Level="Info" Message="[&quot;IE - Enforce Enhanced Protection Option:&quot; + blnEEPOptionEnabled.ToString]" />
+    <While sap:VirtualizedContainerService.HintSize="484,794" sap2010:WorkflowViewState.IdRef="While_1">
+      <While.Condition>
+        <mva:VisualBasicValue x:TypeArguments="x:Boolean" ExpressionText="blnEEPOptionEnabled = true" sap2010:WorkflowViewState.IdRef="VisualBasicValue`1_1" />
+      </While.Condition>
+      <Sequence sap:VirtualizedContainerService.HintSize="376,636" sap2010:WorkflowViewState.IdRef="Sequence_1">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+        <ui:SetFocus DelayBefore="{x:Null}" DelayMS="{x:Null}" ContinueOnError="True" DisplayName="Set Focus 'check box'" sap:VirtualizedContainerService.HintSize="334,106" sap2010:WorkflowViewState.IdRef="SetFocus_1">
+          <ui:SetFocus.Target>
+            <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" Id="6c25a711-436f-4260-aa82-e3d1e77c5d0d" InformativeScreenshot="ef94be374d089aa641d5359521f96308" Selector="&lt;wnd app='rundll32.exe' cls='#32770' title='Internet Properties' /&gt;&lt;wnd cls='#32770' title='Advanced' /&gt;&lt;wnd ctrlid='1439' title='Settings' /&gt;&lt;ctrl name='Enable Enhanced Protected Mode*-ON' role='check box' /&gt;" WaitForReady="COMPLETE">
+              <ui:Target.TimeoutMS>
+                <InArgument x:TypeArguments="x:Int32" />
+              </ui:Target.TimeoutMS>
+            </ui:Target>
+          </ui:SetFocus.Target>
+        </ui:SetFocus>
+        <ui:Click DelayBefore="{x:Null}" DelayMS="{x:Null}" AlterIfDisabled="True" ClickType="CLICK_SINGLE" ContinueOnError="True" DisplayName="Click 'check box'" sap:VirtualizedContainerService.HintSize="334,106" sap2010:WorkflowViewState.IdRef="Click_2" KeyModifiers="None" MouseButton="BTN_LEFT" SendWindowMessages="False" SimulateClick="False">
+          <ui:Click.CursorPosition>
+            <ui:CursorPosition Position="Center">
+              <ui:CursorPosition.OffsetX>
+                <InArgument x:TypeArguments="x:Int32" />
+              </ui:CursorPosition.OffsetX>
+              <ui:CursorPosition.OffsetY>
+                <InArgument x:TypeArguments="x:Int32" />
+              </ui:CursorPosition.OffsetY>
+            </ui:CursorPosition>
+          </ui:Click.CursorPosition>
+          <ui:Click.Target>
+            <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" Id="a91d2f71-66f4-4add-8543-93094e5d1784" InformativeScreenshot="fefc55eeac32a622e8c7f94336f38b5d" Selector="&lt;wnd app='rundll32.exe' cls='#32770' title='Internet Properties' /&gt;&lt;wnd cls='#32770' title='Advanced' /&gt;&lt;wnd ctrlid='1439' title='Settings' /&gt;&lt;ctrl name='Enable Enhanced Protected Mode*-ON' role='check box' /&gt;" WaitForReady="COMPLETE">
+              <ui:Target.TimeoutMS>
+                <InArgument x:TypeArguments="x:Int32" />
+              </ui:Target.TimeoutMS>
+            </ui:Target>
+          </ui:Click.Target>
+        </ui:Click>
+        <ui:Click DelayBefore="{x:Null}" DelayMS="{x:Null}" AlterIfDisabled="True" ClickType="CLICK_SINGLE" ContinueOnError="True" DisplayName="Click 'Button'" sap:VirtualizedContainerService.HintSize="334,106" sap2010:WorkflowViewState.IdRef="Click_5" KeyModifiers="None" MouseButton="BTN_LEFT" SendWindowMessages="False" SimulateClick="False">
+          <ui:Click.CursorPosition>
+            <ui:CursorPosition Position="Center">
+              <ui:CursorPosition.OffsetX>
+                <InArgument x:TypeArguments="x:Int32" />
+              </ui:CursorPosition.OffsetX>
+              <ui:CursorPosition.OffsetY>
+                <InArgument x:TypeArguments="x:Int32" />
+              </ui:CursorPosition.OffsetY>
+            </ui:CursorPosition>
+          </ui:Click.CursorPosition>
+          <ui:Click.Target>
+            <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" Id="f2dcfd8c-621f-4ab3-8ce0-07844f64c3b4" InformativeScreenshot="a0245498f2c2729ceb231e7375672482" Selector="&lt;wnd app='rundll32.exe' cls='#32770' title='Internet Properties' /&gt;&lt;wnd title='&amp;amp;Apply' /&gt;" WaitForReady="COMPLETE">
+              <ui:Target.TimeoutMS>
+                <InArgument x:TypeArguments="x:Int32" />
+              </ui:Target.TimeoutMS>
+            </ui:Target>
+          </ui:Click.Target>
+        </ui:Click>
+        <ui:UiElementExists DisplayName="Element Exists 'check box'" Exists="[blnEEPOptionEnabled]" sap:VirtualizedContainerService.HintSize="334,106" sap2010:WorkflowViewState.IdRef="UiElementExists_2">
+          <ui:UiElementExists.Target>
+            <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" Id="14fd2c46-dc05-4ab7-a8af-7a36bc3efdae" InformativeScreenshot="5da84735ea8a8707133b501348c25238" Selector="&lt;wnd app='rundll32.exe' cls='#32770' title='Internet Properties' /&gt;&lt;wnd cls='#32770' title='Advanced' /&gt;&lt;wnd ctrlid='1439' title='Settings' /&gt;&lt;ctrl name='Enable Enhanced Protected Mode*-ON' role='check box' /&gt;" TimeoutMS="3000" WaitForReady="COMPLETE" />
+          </ui:UiElementExists.Target>
+        </ui:UiElementExists>
+      </Sequence>
+    </While>
+    <ui:InterruptibleDoWhile DisplayName="Do While - Close Internet Properties Window" sap:VirtualizedContainerService.HintSize="484,655" sap2010:WorkflowViewState.IdRef="InterruptibleDoWhile_1">
+      <ui:InterruptibleDoWhile.Body>
+        <Sequence DisplayName="Body" sap:VirtualizedContainerService.HintSize="376,490" sap2010:WorkflowViewState.IdRef="Sequence_5">
+          <sap:WorkflowViewStateService.ViewState>
+            <scg:Dictionary x:TypeArguments="x:String, x:Object">
+              <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+            </scg:Dictionary>
+          </sap:WorkflowViewStateService.ViewState>
+          <ui:SetFocus DelayBefore="{x:Null}" DelayMS="{x:Null}" DisplayName="Set Focus 'Button'" sap:VirtualizedContainerService.HintSize="334,106" sap2010:WorkflowViewState.IdRef="SetFocus_2">
             <ui:SetFocus.Target>
-              <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" TimeoutMS="{x:Null}" InformativeScreenshot="ef94be374d089aa641d5359521f96308" Selector="&lt;wnd app='rundll32.exe' cls='#32770' title='Internet Properties' /&gt;&lt;wnd cls='#32770' title='Advanced' /&gt;&lt;wnd ctrlid='1439' title='Settings' /&gt;&lt;ctrl name='Enable Enhanced Protected Mode*-ON' role='check box' /&gt;" WaitForReady="COMPLETE" />
+              <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" Id="2962f240-2870-4781-9b32-de2ad911350c" InformativeScreenshot="15a5bc27243a31b50bb44a5646857f2d" Selector="&lt;wnd app='rundll32.exe' cls='#32770' title='Internet Properties' /&gt;&lt;wnd title='OK' /&gt;">
+                <ui:Target.TimeoutMS>
+                  <InArgument x:TypeArguments="x:Int32" />
+                </ui:Target.TimeoutMS>
+                <ui:Target.WaitForReady>
+                  <InArgument x:TypeArguments="ui:WaitForReady" />
+                </ui:Target.WaitForReady>
+              </ui:Target>
             </ui:SetFocus.Target>
           </ui:SetFocus>
-          <ui:Click DelayBefore="{x:Null}" DelayMS="{x:Null}" ClickType="CLICK_SINGLE" ContinueOnError="True" DisplayName="Click 'check box'" sap2010:WorkflowViewState.IdRef="Click_2" KeyModifiers="None" MouseButton="BTN_LEFT" SendWindowMessages="False" SimulateClick="False">
+          <ui:Click DelayBefore="{x:Null}" DelayMS="{x:Null}" AlterIfDisabled="True" ClickType="CLICK_SINGLE" DisplayName="Click Ok 'Button'" sap:VirtualizedContainerService.HintSize="334,106" sap2010:WorkflowViewState.IdRef="Click_3" KeyModifiers="None" MouseButton="BTN_LEFT" SendWindowMessages="False" SimulateClick="False">
             <ui:Click.CursorPosition>
               <ui:CursorPosition Position="Center">
                 <ui:CursorPosition.OffsetX>
@@ -109,10 +225,33 @@
               </ui:CursorPosition>
             </ui:Click.CursorPosition>
             <ui:Click.Target>
-              <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" TimeoutMS="{x:Null}" InformativeScreenshot="fefc55eeac32a622e8c7f94336f38b5d" Selector="&lt;wnd app='rundll32.exe' cls='#32770' title='Internet Properties' /&gt;&lt;wnd cls='#32770' title='Advanced' /&gt;&lt;wnd ctrlid='1439' title='Settings' /&gt;&lt;ctrl name='Enable Enhanced Protected Mode*-ON' role='check box' /&gt;" WaitForReady="COMPLETE" />
+              <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" Id="b30b19bd-ce52-4f75-846a-ec7ada975441" InformativeScreenshot="7ca9a68dea68d7e765e13709e6ed26b4" Selector="&lt;wnd app='rundll32.exe' cls='#32770' title='Internet Properties' /&gt;&lt;wnd title='OK' /&gt;" WaitForReady="COMPLETE">
+                <ui:Target.TimeoutMS>
+                  <InArgument x:TypeArguments="x:Int32" />
+                </ui:Target.TimeoutMS>
+              </ui:Target>
             </ui:Click.Target>
           </ui:Click>
-          <ui:Click DelayBefore="{x:Null}" DelayMS="{x:Null}" ClickType="CLICK_SINGLE" ContinueOnError="True" DisplayName="Click 'Button'" sap2010:WorkflowViewState.IdRef="Click_5" KeyModifiers="None" MouseButton="BTN_LEFT" SendWindowMessages="False" SimulateClick="False">
+          <ui:UiElementExists DisplayName="Element Exists 'rundll32.exe Internet'" Exists="[blnInternetPropertiesWindowExists]" sap:VirtualizedContainerService.HintSize="334,106" sap2010:WorkflowViewState.IdRef="UiElementExists_4">
+            <ui:UiElementExists.Target>
+              <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" Id="7fbca740-b50c-4e12-a8ee-e141cc9998fd" InformativeScreenshot="0d2d06efc29e0f41798511f4b2cd70db" Selector="&lt;wnd app='rundll32.exe' cls='#32770' title='Internet Properties' /&gt;" TimeoutMS="2000" WaitForReady="COMPLETE" />
+            </ui:UiElementExists.Target>
+          </ui:UiElementExists>
+        </Sequence>
+      </ui:InterruptibleDoWhile.Body>
+      <ui:InterruptibleDoWhile.Condition>
+        <mva:VisualBasicValue x:TypeArguments="x:Boolean" ExpressionText="blnInternetPropertiesWindowExists" sap2010:WorkflowViewState.IdRef="VisualBasicValue`1_2" />
+      </ui:InterruptibleDoWhile.Condition>
+    </ui:InterruptibleDoWhile>
+    <ui:CommentOut DisplayName="Comment Out" sap:VirtualizedContainerService.HintSize="484,51" sap2010:WorkflowViewState.IdRef="CommentOut_1">
+      <ui:CommentOut.Body>
+        <Sequence DisplayName="Ignored Activities" sap:VirtualizedContainerService.HintSize="376,198" sap2010:WorkflowViewState.IdRef="Sequence_4">
+          <sap:WorkflowViewStateService.ViewState>
+            <scg:Dictionary x:TypeArguments="x:String, x:Object">
+              <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+            </scg:Dictionary>
+          </sap:WorkflowViewStateService.ViewState>
+          <ui:Click DelayBefore="{x:Null}" DelayMS="{x:Null}" AlterIfDisabled="True" ClickType="CLICK_SINGLE" ContinueOnError="True" DisplayName="Click Cancel 'Button'" sap:VirtualizedContainerService.HintSize="334,106" sap2010:WorkflowViewState.IdRef="Click_4" KeyModifiers="None" MouseButton="BTN_LEFT" SendWindowMessages="False" SimulateClick="False">
             <ui:Click.CursorPosition>
               <ui:CursorPosition Position="Center">
                 <ui:CursorPosition.OffsetX>
@@ -124,82 +263,21 @@
               </ui:CursorPosition>
             </ui:Click.CursorPosition>
             <ui:Click.Target>
-              <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" TimeoutMS="{x:Null}" InformativeScreenshot="a0245498f2c2729ceb231e7375672482" Selector="&lt;wnd app='rundll32.exe' cls='#32770' title='Internet Properties' /&gt;&lt;wnd title='&amp;amp;Apply' /&gt;" WaitForReady="COMPLETE" />
-            </ui:Click.Target>
-          </ui:Click>
-          <ui:Click DelayBefore="{x:Null}" DelayMS="{x:Null}" ClickType="CLICK_SINGLE" DisplayName="Click Ok 'Button'" sap2010:WorkflowViewState.IdRef="Click_3" KeyModifiers="None" MouseButton="BTN_LEFT" SendWindowMessages="False" SimulateClick="False">
-            <ui:Click.CursorPosition>
-              <ui:CursorPosition Position="Center">
-                <ui:CursorPosition.OffsetX>
+              <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" Id="3fb1d09a-5ea2-460e-83a6-22065323b12c" InformativeScreenshot="cbab63d1c939f4421e3d9f209a1e1023" Selector="&lt;wnd app='rundll32.exe' cls='#32770' title='Internet Properties' /&gt;&lt;wnd title='Cancel' /&gt;" WaitForReady="COMPLETE">
+                <ui:Target.TimeoutMS>
                   <InArgument x:TypeArguments="x:Int32" />
-                </ui:CursorPosition.OffsetX>
-                <ui:CursorPosition.OffsetY>
-                  <InArgument x:TypeArguments="x:Int32" />
-                </ui:CursorPosition.OffsetY>
-              </ui:CursorPosition>
-            </ui:Click.CursorPosition>
-            <ui:Click.Target>
-              <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" TimeoutMS="{x:Null}" InformativeScreenshot="7ca9a68dea68d7e765e13709e6ed26b4" Selector="&lt;wnd app='rundll32.exe' cls='#32770' title='Internet Properties' /&gt;&lt;wnd title='OK' /&gt;" WaitForReady="COMPLETE" />
+                </ui:Target.TimeoutMS>
+              </ui:Target>
             </ui:Click.Target>
           </ui:Click>
         </Sequence>
-      </If.Then>
-      <If.Else>
-        <Sequence sap2010:WorkflowViewState.IdRef="Sequence_3">
-          <ui:Click DelayBefore="{x:Null}" DelayMS="{x:Null}" ClickType="CLICK_SINGLE" ContinueOnError="True" DisplayName="Click Cancel 'Button'" sap2010:WorkflowViewState.IdRef="Click_4" KeyModifiers="None" MouseButton="BTN_LEFT" SendWindowMessages="False" SimulateClick="False">
-            <ui:Click.CursorPosition>
-              <ui:CursorPosition Position="Center">
-                <ui:CursorPosition.OffsetX>
-                  <InArgument x:TypeArguments="x:Int32" />
-                </ui:CursorPosition.OffsetX>
-                <ui:CursorPosition.OffsetY>
-                  <InArgument x:TypeArguments="x:Int32" />
-                </ui:CursorPosition.OffsetY>
-              </ui:CursorPosition>
-            </ui:Click.CursorPosition>
-            <ui:Click.Target>
-              <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" TimeoutMS="{x:Null}" InformativeScreenshot="cbab63d1c939f4421e3d9f209a1e1023" Selector="&lt;wnd app='rundll32.exe' cls='#32770' title='Internet Properties' /&gt;&lt;wnd title='Cancel' /&gt;" WaitForReady="COMPLETE" />
-            </ui:Click.Target>
-          </ui:Click>
-        </Sequence>
-      </If.Else>
-    </If>
-    <sads:DebugSymbol.Symbol>d3RDOlxVc2Vyc1x2MHYwMGd1XERvY3VtZW50c1xVaVBhdGhcMTEzNl9DTl9NRVJDSF9BTVMtQUNJXENvbXBvbmVudHNcSW50ZXJuZXRPcHRpb25zX0NoayZEaXNhYmxlX0VuaGFuY2VkUHJvdE1vZGUueGFtbB5CA6gBDgIBAUYFRsEBAgEgRwVVEAIBHVYFWhoCARhbBVuVAQIBFVwFpgEKAgECRmxGjQECASFTmAFTkQICAR9HYkdoAgEeWIMBWO4CAgEcWPkCWP8CAgEbVklWYAIBGVtyW5IBAgEWXBNcMQIBA14JkQEUAgEJlAEJpAEUAgEFXwtjGQIBEmQLchYCAQ9zC4EBFgIBDIIBC5ABFgIBCpUBC6MBFgIBBmGeAWGJAwIBFF9SX1gCARNwngFwiQMCARFkaGRuAgEQf54Bf40CAgEOc2hzbgIBDY4BngGOAYECAgELoQGeAaEBhQICAQiVAWiVAW4CAQc=</sads:DebugSymbol.Symbol>
+      </ui:CommentOut.Body>
+      <sap:WorkflowViewStateService.ViewState>
+        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+          <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+          <x:Boolean x:Key="IsPinned">False</x:Boolean>
+        </scg:Dictionary>
+      </sap:WorkflowViewStateService.ViewState>
+    </ui:CommentOut>
   </Sequence>
-  <sap2010:WorkflowViewState.ViewStateManager>
-    <sap2010:ViewStateManager>
-      <sap2010:ViewStateData Id="StartProcess_1" sap:VirtualizedContainerService.HintSize="697,87" />
-      <sap2010:ViewStateData Id="Click_1" sap:VirtualizedContainerService.HintSize="697,106" />
-      <sap2010:ViewStateData Id="UiElementExists_1" sap:VirtualizedContainerService.HintSize="697,106" />
-      <sap2010:ViewStateData Id="LogMessage_1" sap:VirtualizedContainerService.HintSize="697,91" />
-      <sap2010:ViewStateData Id="SetFocus_1" sap:VirtualizedContainerService.HintSize="314,106" />
-      <sap2010:ViewStateData Id="Click_2" sap:VirtualizedContainerService.HintSize="314,106" />
-      <sap2010:ViewStateData Id="Click_5" sap:VirtualizedContainerService.HintSize="314,106" />
-      <sap2010:ViewStateData Id="Click_3" sap:VirtualizedContainerService.HintSize="314,106" />
-      <sap2010:ViewStateData Id="Sequence_1" sap:VirtualizedContainerService.HintSize="336,668">
-        <sap:WorkflowViewStateService.ViewState>
-          <scg:Dictionary x:TypeArguments="x:String, x:Object">
-            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
-          </scg:Dictionary>
-        </sap:WorkflowViewStateService.ViewState>
-      </sap2010:ViewStateData>
-      <sap2010:ViewStateData Id="Click_4" sap:VirtualizedContainerService.HintSize="314,106" />
-      <sap2010:ViewStateData Id="Sequence_3" sap:VirtualizedContainerService.HintSize="336,230">
-        <sap:WorkflowViewStateService.ViewState>
-          <scg:Dictionary x:TypeArguments="x:String, x:Object">
-            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
-          </scg:Dictionary>
-        </sap:WorkflowViewStateService.ViewState>
-      </sap2010:ViewStateData>
-      <sap2010:ViewStateData Id="If_1" sap:VirtualizedContainerService.HintSize="697,816" />
-      <sap2010:ViewStateData Id="Sequence_2" sap:VirtualizedContainerService.HintSize="719,1490">
-        <sap:WorkflowViewStateService.ViewState>
-          <scg:Dictionary x:TypeArguments="x:String, x:Object">
-            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
-          </scg:Dictionary>
-        </sap:WorkflowViewStateService.ViewState>
-      </sap2010:ViewStateData>
-      <sap2010:ViewStateData Id="InternetOptions_Chk_Disable_EnhancedProtMode_1" sap:VirtualizedContainerService.HintSize="759,1570" />
-    </sap2010:ViewStateManager>
-  </sap2010:WorkflowViewState.ViewStateManager>
 </Activity>
